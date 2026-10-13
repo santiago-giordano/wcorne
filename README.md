@@ -9,47 +9,21 @@ Firmware [ZMK](https://zmk.dev) para un Corne inalámbrico con nice!nano v2 y ni
 
 El keymap está en [config/corne.keymap](config/corne.keymap).
 
-### Capas
-
-`▽` = transparente (usa la tecla de la capa de abajo). `–` = sin función.
+### Layer previews
 
 #### Base
-
-```
-Tab    Q  W  E  R  T      Y  U  I  O  P  Bksp
-LShft  A  S  D  F  G      H  J  K  L  ;  Del
-LCtl   Z  X  C  V  B      N  M  ,  .  /  Caps
-          LAlt  Lower  Space      Enter  Raise  RAlt
-```
+<img width="1010" alt="Base" src="docs/layers/base.svg" />
 
 #### Lower (mantener Lower)
-
-```
-Esc    !  @  #  $  %      –  –  ↑  –  –  \
-LShft  ^  &  *  ↑  ~      –  ←  ↓  →  '  =
-LCtl   –  PrtSc  ←  ↓  →  (  )  [  ]  -  `
-          LWin  ▽  Space          Enter  ▽  RAlt
-```
+<img width="1010" alt="Lower" src="docs/layers/lower.svg" />
 
 #### Raise (mantener Raise)
-
-```
-Esc    –  –   ↑  –   Calc    +  7  8  9  *  Bksp
-LShft  –  ←   ↓  →   –       -  4  5  6  /  Del
-LCtl   –  PrtSc  –  –  –     ,  1  2  3  .  =
-          LWin  ▽  Space          Enter  ▽  0
-```
+<img width="1010" alt="Raise" src="docs/layers/raise.svg" />
 
 #### Adjust (mantener Lower + Raise)
+<img width="1010" alt="Adjust" src="docs/layers/adjust.svg" />
 
-```
-Boot    BT0  BT1  BT2  BT3  BT4      –  –  –  –  –  Boot
-Reset   USB  BLE  –    –    –        –  –  –  –  –  Reset
-Studio  –    –    –    –    –        –  –  –  –  –  BT CLR
-                  ▽    ▽    ▽        ▽  ▽  ▽
-```
-
-- **BT0 a BT4**: elige el perfil Bluetooth. Se guardan hasta 5 dispositivos.
+- **BT 0 a BT 4**: elige el perfil Bluetooth. Se guardan hasta 5 dispositivos.
 - **USB / BLE**: fuerza la salida por cable o por Bluetooth, aunque el teclado esté enchufado. El cable va en la mitad **izquierda**.
 - **BT CLR**: borra el emparejamiento del perfil activo. Está lejos de los perfiles para no apretarlo por error.
 - **Boot / Reset**: afectan solo a la mitad donde se aprietan, por eso están en las dos. Boot deja esa mitad lista para flashear.
@@ -59,11 +33,19 @@ Studio  –    –    –    –    –        –  –  –  –  –  BT CLR
 
 | Perfil | Dispositivo |
 |---|---|
-| BT0 | PC personal (Windows) |
-| BT1 | PC personal (Omarchy) |
-| BT2 | Celular |
-| USB | PC del trabajo |
+| BT 0 | PC 1 |
+| BT 1 | PC 2 |
+| BT 2 | PC 3 |
+| USB | PC sin BT |
 
 ### Flashear
 
 El firmware se compila con GitHub Actions en cada push (pestaña Actions, artifact `firmware`). Para cambios de keymap alcanza con flashear `corne_left`. La mitad derecha solo se reflashea si cambia algo de su propio firmware.
+
+### Regenerar las imágenes de las capas
+
+Si cambias el keymap, edita las capas en [docs/generate_layers.py](docs/generate_layers.py) y corre:
+
+```
+python docs/generate_layers.py
+```
