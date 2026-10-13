@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="900" alt="Wireless Corne" src="https://github.com/user-attachments/assets/0e4540cb-65be-4db0-9063-eaaef82d1726" />
+  <img width="520" alt="Wireless Corne" src="docs/keyboard.jpg" />
 </p>
 
 <h1 align="center">Wireless HotSwap MX Ergo Split Corne Keyboard</h1>
