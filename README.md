@@ -3,7 +3,6 @@
 </p>
 
 <h1 align="center">Wireless HotSwap MX Ergo Split Corne Keyboard</h1>
-<p align="center">Compacto, inalámbrico y pensado para aprovechar al máximo cada tecla</p>
 
 Firmware [ZMK](https://zmk.dev) para un Corne inalámbrico con nice!nano v2 y nice!view. Pensado para el layout de teclado **Estados Unidos - Internacional** del sistema operativo (la ñ y los tildes se escriben con RAlt).
 
