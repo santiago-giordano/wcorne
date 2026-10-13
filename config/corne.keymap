@@ -1,120 +1,62 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/ext_power.h>
 #include <dt-bindings/zmk/keys.h>
-#include "keys_es_latin_american.h"
+#include <dt-bindings/zmk/outputs.h>
 
-#define BASE_TD     0
-#define BASE_NORMAL 1
-#define LOWER       2
-#define RAISE       3
-#define EXTRA       4
+// Migrado desde la config de VIA. Layout del SO: Estados Unidos - Internacional.
+
+#define BASE   0
+#define LOWER  1
+#define RAISE  2
+#define ADJUST 3
 
 / {
-    combos {
-        compatible = "zmk,combos";
-
-        er_less {
-            bindings = <&kp ES_LT>;
-            key-positions = <3 4>;
-        };
-
-        rt_greater {
-            bindings = <&kp ES_GT>;
-            key-positions = <4 5>;
-        };
-
-        yu_plus {
-            bindings = <&kp ES_PLUS>;
-            key-positions = <6 7>;
-        };
-
-        hj_minus {
-            bindings = <&kp MINUS>;
-            key-positions = <18 19>;
-        };
-
-        nm_asterisk {
-            bindings = <&kp ES_ASTERISK>;
-            key-positions = <30 31>;
-        };
-
-        space_enter_base {
-            timeout-ms = <100>;
-            key-positions = <38 39>;
-            layers = <BASE_TD BASE_NORMAL>;
-            bindings = <&base_hold BASE_NORMAL 0>;
-        };
-    };
-
-    behaviors {
-        td_lshft_caps: td_lshft_caps {
-            compatible = "zmk,behavior-tap-dance";
-            label = "TD_LSHFT_CAPS";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp LSHFT>, <&kp CAPS>;
-        };
-
-        base_hold: base_hold {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <2000>;
-            bindings = <&tog>, <&none>;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
-        // 0: Base con tap-dance en Shift.
-        default_layer {
+        // 0: Base.
+        base_layer {
+            display-name = "Base";
             bindings = <
-&kp TAB         &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y  &kp U  &kp I      &kp O    &kp P           &kp BSPC
-&td_lshft_caps  &kp A  &kp S  &kp D  &kp F  &kp G        &kp H  &kp J  &kp K      &kp L    &kp ES_N_TILDE  &kp ES_ACUTE
-&kp LCTRL       &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N  &kp M  &kp COMMA  &kp DOT  &kp ES_SLASH    &kp ESC
-                   &kp LALT  &mo RAISE  &kp SPACE        &kp RET  &mo LOWER  &kp INSERT
+&kp TAB    &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y  &kp U  &kp I      &kp O    &kp P      &kp BSPC
+&kp LSHFT  &kp A  &kp S  &kp D  &kp F  &kp G        &kp H  &kp J  &kp K      &kp L    &kp SEMI   &kp DEL
+&kp LCTRL  &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH   &kp CAPS
+                 &kp LALT  &mo LOWER  &kp SPACE     &kp RET  &mo RAISE  &kp RALT
             >;
         };
 
-        // 1: Base con Shift normal.
-        normal_base_layer {
-            bindings = <
-&kp TAB    &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y  &kp U  &kp I      &kp O    &kp P           &kp BSPC
-&kp LSHFT  &kp A  &kp S  &kp D  &kp F  &kp G        &kp H  &kp J  &kp K      &kp L    &kp ES_N_TILDE  &kp ES_ACUTE
-&kp LCTRL  &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N  &kp M  &kp COMMA  &kp DOT  &kp ES_SLASH    &kp ESC
-              &kp LALT  &mo RAISE  &kp SPACE        &kp RET  &mo LOWER  &kp INSERT
-            >;
-        };
-
-        // 2: Lower. Shift hereda el comportamiento de la base activa.
+        // 1: Lower. Simbolos y flechas.
         lower_layer {
+            display-name = "Lower";
             bindings = <
-&kp TAB    &kp ES_AT  &none   &none   &none            &none          &kp N7  &kp N8  &kp N9  &kp ES_PLUS     &kp ES_MINUS    &kp DELETE
-&trans     &none      &none   &none   &kp ES_LPAR      &kp ES_RPAR    &kp N4  &kp N5  &kp N6  &kp N0          &kp UP_ARROW    &kp KP_DIVIDE
-&kp LCTRL  &trans     &trans  &trans  &kp ES_QUESTION  &kp ES_EXCL    &kp N1  &kp N2  &kp N3  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW
-                              &kp LGUI  &trans  &kp SPACE           &kp RET  &trans  &kp N0
+&kp ESC    &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT        &none     &none     &kp UP     &none     &none    &kp BSLH
+&kp LSHFT  &kp CARET  &kp AMPS   &kp STAR   &kp UP     &kp TILDE        &none     &kp LEFT  &kp DOWN   &kp RIGHT &kp SQT  &kp EQUAL
+&kp LCTRL  &none      &kp PSCRN  &kp LEFT   &kp DOWN   &kp RIGHT        &kp LPAR  &kp RPAR  &kp LBKT   &kp RBKT  &kp MINUS &kp GRAVE
+                           &kp LGUI  &trans  &kp SPACE                  &kp RET  &trans  &kp RALT
             >;
         };
 
-        // 3: Raise.
+        // 2: Raise. Numpad y navegacion.
         raise_layer {
+            display-name = "Raise";
             bindings = <
-&kp C_PLAY_PAUSE  &kp C_PREVIOUS  &kp C_NEXT  &kp C_MUTE  &kp C_VOLUME_DOWN  &kp C_VOLUME_UP    &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp ES_PLUS      &kp ES_MINUS    &kp ES_ASTERISK
-&kp LSHFT         &bt BT_PRV      &bt BT_NXT  &bt BT_CLR  &kp ES_LPAR        &kp ES_RPAR        &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_NUMBER_0  &kp UP_ARROW    &kp KP_DIVIDE
-&kp LCTRL         &trans          &trans     &trans      &kp ES_QUESTION    &kp ES_EXCL        &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp LEFT_ARROW   &kp DOWN_ARROW  &kp RIGHT_ARROW
-                                                &kp LGUI  &trans  &kp SPACE                &kp RET  &trans  &kp RALT
+&kp ESC    &none  &none     &kp UP     &none      &kp C_AL_CALC     &kp KP_PLUS   &kp N7  &kp N8  &kp N9  &kp KP_MULTIPLY  &kp BSPC
+&kp LSHFT  &none  &kp LEFT  &kp DOWN   &kp RIGHT  &none             &kp KP_MINUS  &kp N4  &kp N5  &kp N6  &kp KP_DIVIDE    &kp DEL
+&kp LCTRL  &none  &kp PSCRN &none      &none      &none             &kp COMMA     &kp N1  &kp N2  &kp N3  &kp DOT          &kp EQUAL
+                           &kp LGUI  &trans  &kp SPACE              &kp RET  &trans  &kp N0
             >;
         };
 
-        // 4: Extra, activa al mantener Lower + Raise.
-        extra_layer {
+        // 3: Adjust (Lower + Raise). Bluetooth y sistema.
+        // Bootloader/reset solo afectan a la mitad donde se presionan, por eso estan en ambas.
+        // BT_CLR queda en la otra mano, lejos de los perfiles.
+        adjust_layer {
+            display-name = "Adjust";
             bindings = <
-&studio_unlock  &trans  &trans  &trans  &trans  &trans       &kp ES_EQUAL      &kp LS(SQT)         &kp ES_PIPE       &trans  &trans  &trans
-&trans          &trans  &trans  &trans  &trans  &trans       &kp ES_AT         &kp ES_SQT         &kp ES_BACKSLASH  &trans  &trans  &trans
-&trans          &trans  &trans  &trans  &trans  &trans       &ext_power EP_ON  &ext_power EP_OFF  &trans            &trans  &trans  &trans
-                               &trans  &trans  &kp SPACE    &kp ENTER  &trans  &kp RIGHT_ALT
+&bootloader      &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4        &none  &none  &none  &none  &none  &bootloader
+&sys_reset       &out OUT_USB   &out OUT_BLE   &none         &none         &none               &none  &none  &none  &none  &none  &sys_reset
+&studio_unlock   &none          &none          &none         &none         &none               &none  &none  &none  &none  &none  &bt BT_CLR
+                                  &trans  &trans  &trans                                       &trans  &trans  &trans
             >;
         };
     };
@@ -122,9 +64,9 @@
     conditional_layers {
         compatible = "zmk,conditional-layers";
 
-        extra_layer {
+        adjust_layer {
             if-layers = <LOWER RAISE>;
-            then-layer = <EXTRA>;
+            then-layer = <ADJUST>;
         };
     };
 };
