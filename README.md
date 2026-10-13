@@ -5,16 +5,65 @@
 <h1 align="center">Wireless HotSwap MX Ergo Split Corne Keyboard</h1>
 <p align="center">Compacto, inalámbrico y pensado para aprovechar al máximo cada tecla</p>
 
-### Layer previews
+Firmware [ZMK](https://zmk.dev) para un Corne inalámbrico con nice!nano v2 y nice!view. Pensado para el layout de teclado **Estados Unidos - Internacional** del sistema operativo (la ñ y los tildes se escriben con RAlt).
+
+El keymap está en [config/corne.keymap](config/corne.keymap).
+
+### Capas
+
+`▽` = transparente (usa la tecla de la capa de abajo). `–` = sin función.
 
 #### Base
-<img width="1333" height="435" alt="image" src="https://github.com/user-attachments/assets/37bead11-6a41-495a-8050-b5f490de531b" />
 
-#### Lower
-<img width="1323" height="439" alt="image" src="https://github.com/user-attachments/assets/9eb23cf9-94f8-4bd1-9b5f-3b1fc6ae5e78" />
+```
+Tab    Q  W  E  R  T      Y  U  I  O  P  Bksp
+LShft  A  S  D  F  G      H  J  K  L  ;  Del
+LCtl   Z  X  C  V  B      N  M  ,  .  /  Caps
+          LAlt  Lower  Space      Enter  Raise  RAlt
+```
 
-#### Raise
-<img width="1323" height="433" alt="image" src="https://github.com/user-attachments/assets/bfa2a616-b5c0-42fd-81db-6ebc022ea842" />
+#### Lower (mantener Lower)
 
-#### Adjust
-<img width="1323" height="433" alt="image" src="https://github.com/user-attachments/assets/99f0bac7-8d1f-44e1-ba15-74e243d0b068" />
+```
+Esc    !  @  #  $  %      –  –  ↑  –  –  \
+LShft  ^  &  *  ↑  ~      –  ←  ↓  →  '  =
+LCtl   –  PrtSc  ←  ↓  →  (  )  [  ]  -  `
+          LWin  ▽  Space          Enter  ▽  RAlt
+```
+
+#### Raise (mantener Raise)
+
+```
+Esc    –  –   ↑  –   Calc    +  7  8  9  *  Bksp
+LShft  –  ←   ↓  →   –       -  4  5  6  /  Del
+LCtl   –  PrtSc  –  –  –     ,  1  2  3  .  =
+          LWin  ▽  Space          Enter  ▽  0
+```
+
+#### Adjust (mantener Lower + Raise)
+
+```
+Boot    BT0  BT1  BT2  BT3  BT4      –  –  –  –  –  Boot
+Reset   USB  BLE  –    –    –        –  –  –  –  –  Reset
+Studio  –    –    –    –    –        –  –  –  –  –  BT CLR
+                  ▽    ▽    ▽        ▽  ▽  ▽
+```
+
+- **BT0 a BT4**: elige el perfil Bluetooth. Se guardan hasta 5 dispositivos.
+- **USB / BLE**: fuerza la salida por cable o por Bluetooth, aunque el teclado esté enchufado. El cable va en la mitad **izquierda**.
+- **BT CLR**: borra el emparejamiento del perfil activo. Está lejos de los perfiles para no apretarlo por error.
+- **Boot / Reset**: afectan solo a la mitad donde se aprietan, por eso están en las dos. Boot deja esa mitad lista para flashear.
+- **Studio**: desbloquea [ZMK Studio](https://zmk.studio), habilitado en la mitad izquierda.
+
+### Perfiles Bluetooth
+
+| Perfil | Dispositivo |
+|---|---|
+| BT0 | PC personal (Windows) |
+| BT1 | PC personal (Omarchy) |
+| BT2 | Celular |
+| USB | PC del trabajo |
+
+### Flashear
+
+El firmware se compila con GitHub Actions en cada push (pestaña Actions, artifact `firmware`). Para cambios de keymap alcanza con flashear `corne_left`. La mitad derecha solo se reflashea si cambia algo de su propio firmware.
