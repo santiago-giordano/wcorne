@@ -33,10 +33,10 @@ El keymap está en [config/corne.keymap](config/corne.keymap).
 
 | Perfil | Dispositivo |
 |---|---|
-| BT 0 | PC personal (Windows) |
-| BT 1 | PC personal (Omarchy) |
-| BT 2 | Celular |
-| USB | PC del trabajo |
+| BT 0 | PC 1 |
+| BT 1 | PC 2 |
+| BT 2 | PC 3 |
+| USB | PC sin BT |
 
 ### Flashear
 
